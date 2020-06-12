@@ -1,7 +1,0 @@
-export * from './CalendarResource'
-export * from './DiskspaceResource'
-export * from './HistoryResource'
-export * from './IndexerResource'
-export * from './MovieResource'
-export * from './ProfileResource'
-export * from './SystemResource'
