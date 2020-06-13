@@ -10,7 +10,8 @@ function create_mod() {
   truncate -s 0 ${MOD}
 
   for TSFILE in ${1}/*/*.ts; do
-    echo $TSFILE
+    FILE=${TSFILE#"$1"}
+    echo "export * from '.${FILE}'" >> ${MOD}
   done
 }
 
@@ -19,3 +20,5 @@ for MODULE in ${CWD}/*; do
     create_mod ${MODULE}
   fi
 done
+
+deno $@ --allow-env --allow-net --allow-read

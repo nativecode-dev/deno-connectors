@@ -1,3 +1,3 @@
-export * from './rest-couchdb/mod.ts'
-export * from './rest-radarr/mod.ts'
-export * from './rest-sonarr/mod.ts'
+export * as Rest from './rest-couchdb/mod.ts'
+export * as Radarr from './rest-radarr/mod.ts'
+export * as Sonarr from './rest-sonarr/mod.ts'

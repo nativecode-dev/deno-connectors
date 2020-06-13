@@ -1,0 +1,22 @@
+image: nativecode/deno:0.2.0
+
+stages:
+  - test
+  - publish
+
+test:
+  stage: test
+  script:
+    - deno run http://github.com/nativecode-dev/dent/mod.ts
+    - deno test -c tsconfig.json --allow-env --allow-net --allow-read --allow-write
+
+publish:
+  stage: publish
+  script:
+    - mkdir dist
+    - deno bundle -c tsconfig.json mod.ts dist/mod.ts
+  only:
+    - master
+  artifacts:
+    paths:
+      - dist

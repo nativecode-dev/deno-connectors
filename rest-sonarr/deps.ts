@@ -1,3 +1,3 @@
-export * from 'http://github.com/nativecode-dev/dent/raw/master/object-merge/mod.ts'
-export * from 'http://github.com/nativecode-dev/dent/raw/master/rest/mod.ts'
-export * from 'http://github.com/nativecode-dev/dent/raw/master/ts-types/mod.ts'
+export * from 'https://deno.land/x/gh:nativecode-dev:dent/object-merge/mod.ts'
+export * from 'https://deno.land/x/gh:nativecode-dev:dent/rest/mod.ts'
+export * from 'https://deno.land/x/gh:nativecode-dev:dent/ts-types/mod.ts'
