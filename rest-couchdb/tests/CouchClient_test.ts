@@ -4,10 +4,10 @@ import { CouchClient } from '../lib/CouchClient.ts'
 
 const CREDENTIALS = {
   username: 'admin',
-  password: '2bpi9AN0o1Q5ZcLs',
+  password: 'password',
 }
 
-const ENDPOINT = new URL('http://couchdb.in.nativecode.com')
+const ENDPOINT = new URL('http://localhost:5984')
 
 const CLIENT = new CouchClient(ENDPOINT, CREDENTIALS)
 

@@ -9,7 +9,11 @@ test:
   script:
     - deno run --allow-env --allow-read --allow-write http://deno.land/x/gh:nativecode-dev:dent/build.ts
     - deno test --allow-env --allow-net --allow-read --allow-write
-
+  services:
+    - couchdb:2
+  variables:
+    COUCHDB_USER: admin
+    COUCHDB_PASSWORD: password
 publish:
   stage: publish
   script:
