@@ -1,10 +1,26 @@
-import { Essentials } from '../deps.ts'
+import { ConnectorOptions, ConnectorProtocols, Essentials, ObjectMerge } from '../deps.ts'
 
-import { CouchOptions } from './CouchOptions.ts'
 import { DatabaseResource } from './DatabaseResource.ts'
 
-export class CouchClient {
-  public readonly database: DatabaseResource = new DatabaseResource(this.url, this.options)
+const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
+  endpoint: {
+    host: 'localhost',
+    port: 5984,
+    protocol: ConnectorProtocols.http,
+  },
+  name: 'couchdb',
+}
 
-  constructor(private readonly url: URL, private readonly options: Essentials.DeepPartial<CouchOptions> = {}) {}
+export class CouchClient {
+  public readonly database: DatabaseResource
+
+  constructor(options: Essentials.DeepPartial<ConnectorOptions>) {
+    const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
+    const url = new URL(`${opts.endpoint.protocol}://${opts.endpoint.host}:${opts.endpoint.port}`)
+
+    this.database = new DatabaseResource(url, {
+      password: opts.credentials?.password,
+      username: opts.credentials?.username,
+    })
+  }
 }
