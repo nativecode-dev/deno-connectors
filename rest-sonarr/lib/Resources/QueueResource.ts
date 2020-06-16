@@ -1,11 +1,11 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Queue } from '../Models/Queue.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class QueueResource extends RestResource {
+export class QueueResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   delete(id: number, blacklist: boolean = false) {

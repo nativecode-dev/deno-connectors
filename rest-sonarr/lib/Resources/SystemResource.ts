@@ -1,12 +1,9 @@
-import { RestResource } from '../../deps.ts'
-
 import { SystemStatus } from '../Models/SystemStatus.ts'
-import { SonarrPackageOptions } from '../SonarrPackageOptions.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class SystemResource extends RestResource {
+export class SystemResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   status(): Promise<SystemStatus> {

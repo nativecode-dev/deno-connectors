@@ -1,15 +1,24 @@
-import { assertEquals } from '../test_deps.ts'
+import { ConnectorOptions, ConnectorProtocols, Essentials, ObjectMerge } from '../deps.ts'
+import { Env, assertEquals } from '../test_deps.ts'
 
 import { CouchClient } from '../lib/CouchClient.ts'
 
-const CREDENTIALS = {
-  username: 'admin',
-  password: 'password',
+const env = new Env({ env: Deno.env.toObject(), prefix: ['TEST'] })
+
+const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
+  credentials: {
+    password: '',
+    username: '',
+  },
+  endpoint: {
+    host: 'localhost',
+    port: 5984,
+    protocol: ConnectorProtocols.http,
+  },
+  name: 'couchdb',
 }
 
-const ENDPOINT = new URL('http://localhost:5984')
-
-const CLIENT = new CouchClient(ENDPOINT, CREDENTIALS)
+const CLIENT = new CouchClient(ObjectMerge.merge(OPTIONS, env.toObject().test.couchdb))
 
 Deno.test('should create database', async () => {
   const response = await CLIENT.database.create('plexify')

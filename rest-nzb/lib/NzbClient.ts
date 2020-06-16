@@ -1,23 +1,23 @@
 import { ConnectorOptions, ConnectorProtocols, Essentials, ObjectMerge } from '../deps.ts'
 
-import { DatabaseResource } from './DatabaseResource.ts'
+import { NzbResource } from './NzbResource.ts'
 
 const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
     host: 'localhost',
-    port: 5984,
+    port: 80,
     protocol: ConnectorProtocols.http,
   },
   name: 'couchdb',
 }
 
-export class CouchClient {
-  public readonly database: DatabaseResource
+export class NzbClient {
+  public readonly nzb: NzbResource
 
   constructor(options: Essentials.DeepPartial<ConnectorOptions>) {
     const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
     const url = new URL(`${opts.endpoint.protocol}://${opts.endpoint.host}:${opts.endpoint.port}`)
-    const dbopts = { password: opts.credentials?.password, username: opts.credentials?.username }
-    this.database = new DatabaseResource(url, dbopts)
+    const resopts = { apikey: opts.credentials?.password }
+    this.nzb = new NzbResource(url, resopts)
   }
 }

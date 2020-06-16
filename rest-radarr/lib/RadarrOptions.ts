@@ -1,4 +1,6 @@
-export interface RadarrOptions {
+import { ResourceOptions } from '../deps.ts'
+
+export interface RadarrOptions extends ResourceOptions {
   apikey: string
   host: string
   port: number

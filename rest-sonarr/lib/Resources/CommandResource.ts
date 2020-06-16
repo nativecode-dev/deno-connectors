@@ -1,11 +1,11 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Command } from '../Models/Command.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class CommandResource extends RestResource {
+export class CommandResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   backup(): Promise<Command> {

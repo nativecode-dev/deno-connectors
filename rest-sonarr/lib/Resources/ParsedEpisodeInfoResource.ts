@@ -1,11 +1,11 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { ParsedEpisodeInfo } from '../Models/ParsedEpisodeInfo.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class ParsedEpisodeInfoResource extends RestResource {
+export class ParsedEpisodeInfoResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   parse(path?: string, title?: string): Promise<ParsedEpisodeInfo> {

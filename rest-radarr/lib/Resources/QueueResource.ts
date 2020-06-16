@@ -1,11 +1,11 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Queue } from '../Models/Queue.ts'
+import { RadarrResource } from '../RadarrResource.ts'
 
-export class QueueResource extends RestResource {
+export class QueueResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   delete(id: number, blacklist: boolean = false) {

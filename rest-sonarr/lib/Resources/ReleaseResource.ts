@@ -1,12 +1,12 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Release } from '../Models/Release.ts'
 import { ReleasePush } from '../Models/ReleasePush.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class ReleaseResource extends RestResource {
+export class ReleaseResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   download(guid: string, indexerId: string): Promise<Release[]> {

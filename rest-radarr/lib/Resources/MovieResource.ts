@@ -1,12 +1,12 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Movie } from '../Models/Movie.ts'
 import { MovieInfo } from '../Models/MovieInfo.ts'
+import { RadarrResource } from '../RadarrResource.ts'
 
-export class MovieResource extends RestResource {
+export class MovieResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   add(movie: MovieInfo): Promise<Movie> {

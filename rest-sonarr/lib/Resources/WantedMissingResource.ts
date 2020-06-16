@@ -1,13 +1,13 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Paging } from '../Models/Paging.ts'
 import { WantedMissing } from '../Models/WantedMissing.ts'
 import { PagingOptions } from './PagingOptions.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class WantedMissingResource extends RestResource {
+export class WantedMissingResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   list(sortKey: string = 'airDateUtc', options: PagingOptions = {}): Promise<Paging<WantedMissing>> {

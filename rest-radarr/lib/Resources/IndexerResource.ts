@@ -1,11 +1,11 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Indexer } from '../Models/Indexer.ts'
+import { RadarrResource } from '../RadarrResource.ts'
 
-export class IndexerResource extends RestResource {
+export class IndexerResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   indexer(id: number): Promise<Indexer> {

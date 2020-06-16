@@ -2,7 +2,7 @@ import { Essentials, RestResource } from '../deps.ts'
 
 import { CouchOptions } from './CouchOptions.ts'
 
-export abstract class CouchResource extends RestResource {
+export abstract class CouchResource extends RestResource<CouchOptions> {
   constructor(url: URL, options: Essentials.DeepPartial<CouchOptions> = {}) {
     super(url, options)
 

@@ -1,11 +1,11 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { Series } from '../Models/Series.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class SeriesResource extends RestResource {
+export class SeriesResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   id(id: number): Promise<Series> {

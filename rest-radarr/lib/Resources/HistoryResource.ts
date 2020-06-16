@@ -1,12 +1,12 @@
-import { ResourceParamType, RestResource } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { History } from '../Models/History.ts'
 import { HistoryOptions } from './HistoryOptions.ts'
+import { RadarrResource } from '../RadarrResource.ts'
 
-export class HistoryResource extends RestResource {
+export class HistoryResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   page(page: number = 1, options?: HistoryOptions): Promise<History> {

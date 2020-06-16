@@ -1,12 +1,12 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { EpisodeFile } from '../Models/EpisodeFile.ts'
 import { EpisodeFileQuality } from '../Models/EpisodeFileQuality.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class EpisodeFileResource extends RestResource {
+export class EpisodeFileResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   delete(episodeFileId: number) {

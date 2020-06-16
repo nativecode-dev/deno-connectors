@@ -1,11 +1,9 @@
-import { RestResource } from '../../deps.ts'
-
 import { Diskspace } from '../Models/Diskspace.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class DiskspaceResource extends RestResource {
+export class DiskspaceResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   list(): Promise<Diskspace[]> {

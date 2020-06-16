@@ -1,11 +1,9 @@
-import { RestResource } from '../../deps.ts'
-
 import { Profile } from '../Models/Profile.ts'
+import { RadarrResource } from '../RadarrResource.ts'
 
-export class ProfileResource extends RestResource {
+export class ProfileResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   list(start?: string, end?: string): Promise<Profile[]> {

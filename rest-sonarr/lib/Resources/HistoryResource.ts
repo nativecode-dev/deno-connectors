@@ -1,12 +1,12 @@
-import { RestResource, ResourceParamType } from '../../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
 import { History } from '../Models/History.ts'
 import { PagingOptions } from './PagingOptions.ts'
+import { SonarrResource } from '../SonarrResource.ts'
 
-export class HistoryResource extends RestResource {
+export class HistoryResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url)
-    this.setHeader('X-Api-Key', apikey)
+    super(url, apikey)
   }
 
   get(sortKey: string = 'date', options: PagingOptions = {}): Promise<History> {
