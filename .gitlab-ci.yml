@@ -7,14 +7,14 @@ stages:
 test:
   stage: test
   script:
-    - deno run http://github.com/nativecode-dev/dent/mod.ts
-    - deno test -c tsconfig.json --allow-env --allow-net --allow-read --allow-write
+    - deno run --allow-env --allow-read --allow-write http://deno.land/x/gh:nativecode-dev:dent/build.ts
+    - deno test --allow-env --allow-net --allow-read --allow-write
 
 publish:
   stage: publish
   script:
     - mkdir dist
-    - deno bundle -c tsconfig.json mod.ts dist/mod.ts
+    - deno bundle mod.ts dist/mod.ts
   only:
     - master
   artifacts:

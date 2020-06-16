@@ -14,12 +14,12 @@ export class CalendarResource extends RestResource {
       {
         key: 'end',
         type: ResourceParamType.Query,
-        value: end || '',
+        value: end,
       },
       {
         key: 'start',
         type: ResourceParamType.Query,
-        value: start || '',
+        value: start,
       },
     )
   }
