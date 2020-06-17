@@ -8,7 +8,5 @@ export class ServerResource extends CouchResource {
     return this.http_get<ActiveTasks>('_active_tasks')
   }
 
-  clusterSetup() {
-    
-  }
+  clusterSetup() {}
 }

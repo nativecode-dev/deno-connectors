@@ -1,4 +1,4 @@
 export enum HistorySortKey {
   Date = 'date',
-  Title = 'movie.title'
+  Title = 'movie.title',
 }
