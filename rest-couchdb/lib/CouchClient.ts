@@ -1,6 +1,6 @@
 import { ConnectorOptions, ConnectorProtocols, Essentials, ObjectMerge } from '../deps.ts'
 
-import { DatabaseResource } from './DatabaseResource.ts'
+import { DatabaseResource } from './Resources/DatabaseResource.ts'
 
 const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {

@@ -1,2 +1,7 @@
+export * from './lib/Models/SearchAttribute.ts'
+export * from './lib/Models/SearchChannel.ts'
+export * from './lib/Models/SearchResult.ts'
+export * from './lib/Models/SearchResultItem.ts'
 export * from './lib/NzbClient.ts'
 export * from './lib/NzbOptions.ts'
+export * from './lib/NzbResource.ts'

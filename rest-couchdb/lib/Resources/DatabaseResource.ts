@@ -1,7 +1,7 @@
-import { ResourceParamType } from '../deps.ts'
+import { ResourceParamType } from '../../deps.ts'
 
-import { CouchResource } from './CouchResource.ts'
-import { DatabaseInfo } from './responses/DatabaseInfo.ts'
+import { CouchResource } from '../CouchResource.ts'
+import { DatabaseInfo } from '../Responses/DatabaseInfo.ts'
 
 export class DatabaseResource extends CouchResource {
   create(dbname: string, q?: number, n?: number, partitioned: boolean = false) {
