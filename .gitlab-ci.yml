@@ -9,6 +9,7 @@ test:
   script:
     - deno run --allow-net http://deno.land/x/gh:nativecode-dev:dent/connector/mod_run.ts localhost --port 5984
     - deno run --allow-env --allow-read --allow-write --unstable http://deno.land/x/gh:nativecode-dev:dent/dent-cli/mod_run.ts refresh --log
+    - deno cache mod.ts
     - deno test --allow-env --allow-net --allow-read --allow-write
   services:
     - couchdb:2
