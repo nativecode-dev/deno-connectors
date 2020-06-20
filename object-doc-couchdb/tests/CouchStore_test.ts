@@ -14,7 +14,7 @@ const envobj = env.toObject()
 const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
     host: 'localhost',
-    port: 80,
+    port: 5984,
     protocol: ConnectorProtocols.http,
   },
   name: 'couchdb',
