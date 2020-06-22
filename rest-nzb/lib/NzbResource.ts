@@ -4,8 +4,8 @@ import { NzbOptions } from './NzbOptions.ts'
 import { SearchResult } from '../lib/Models/SearchResult.ts'
 
 export class NzbResource extends RestResource<NzbOptions> {
-  constructor(url: URL, options: Essentials.DeepPartial<NzbOptions> = {}) {
-    super(url, options)
+  constructor(options: Essentials.DeepPartial<NzbOptions> = {}) {
+    super(options)
   }
 
   capabilities() {

@@ -1,5 +1,3 @@
-import { ResourceParamType } from '../../deps.ts'
-
 import { CouchResource } from '../CouchResource.ts'
 import { ActiveTasks } from '../Responses/ActiveTasks.ts'
 

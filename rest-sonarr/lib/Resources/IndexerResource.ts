@@ -5,7 +5,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class IndexerResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   indexer(id: number): Promise<Indexer> {

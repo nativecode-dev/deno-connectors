@@ -5,7 +5,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class CommandResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   backup(): Promise<Command> {

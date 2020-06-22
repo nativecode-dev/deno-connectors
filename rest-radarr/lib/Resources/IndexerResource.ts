@@ -5,7 +5,7 @@ import { RadarrResource } from '../RadarrResource.ts'
 
 export class IndexerResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   indexer(id: number): Promise<Indexer> {

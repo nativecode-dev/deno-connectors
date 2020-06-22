@@ -5,7 +5,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class QueueResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   delete(id: number, blacklist: boolean = false) {

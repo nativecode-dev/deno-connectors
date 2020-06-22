@@ -3,7 +3,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class SystemResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   status(): Promise<SystemStatus> {

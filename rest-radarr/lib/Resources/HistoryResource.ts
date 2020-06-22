@@ -6,7 +6,7 @@ import { RadarrResource } from '../RadarrResource.ts'
 
 export class HistoryResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   page(page: number = 1, options?: HistoryOptions): Promise<History> {

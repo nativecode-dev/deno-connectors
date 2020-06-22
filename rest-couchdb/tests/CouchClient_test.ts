@@ -16,7 +16,6 @@ const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
 }
 
 const options = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, envobj.test.couchdb)
-console.log(options)
 const CLIENT = new CouchClient(options)
 
 Deno.test('[rest-couchdb] should create database', async () => {

@@ -4,6 +4,7 @@ import { Env, assertEquals, assertNotEquals } from '../test_deps.ts'
 import { NzbClient } from '../lib/NzbClient.ts'
 
 const env = new Env({ env: Deno.env.toObject(), prefix: ['TEST'] })
+const envobj = env.toObject()
 
 const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
@@ -14,7 +15,7 @@ const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
   name: 'nzb',
 }
 
-const client = new NzbClient(ObjectMerge.merge(OPTIONS, env.toObject().test.nzb))
+const client = new NzbClient(ObjectMerge.merge<ConnectorOptions>(OPTIONS, envobj.test.nzb))
 
 Deno.test('should get capabilities', async () => {
   const response = await client.nzb.capabilities()

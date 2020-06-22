@@ -5,7 +5,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class ParsedEpisodeInfoResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   parse(path?: string, title?: string): Promise<ParsedEpisodeInfo> {

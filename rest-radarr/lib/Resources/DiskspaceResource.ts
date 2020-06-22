@@ -3,7 +3,7 @@ import { RadarrResource } from '../RadarrResource.ts'
 
 export class DiskspaceResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   list(): Promise<Diskspace[]> {

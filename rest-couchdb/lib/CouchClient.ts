@@ -1,5 +1,6 @@
 import { ConnectorOptions, ConnectorProtocols, Essentials, ObjectMerge } from '../deps.ts'
 
+import { CouchOptions } from './CouchOptions.ts'
 import { DatabaseResource } from './Resources/DatabaseResource.ts'
 
 const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
@@ -16,8 +17,11 @@ export class CouchClient {
 
   constructor(options: Essentials.DeepPartial<ConnectorOptions>) {
     const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
-    const url = new URL(`${opts.endpoint.protocol}://${opts.endpoint.host}:${opts.endpoint.port}`)
-    const dbopts = { password: opts.credentials?.password, username: opts.credentials?.username }
-    this.database = new DatabaseResource(url, dbopts)
+    const dbopts: Essentials.DeepPartial<CouchOptions> = {
+      password: opts.credentials?.password,
+      username: opts.credentials?.username,
+      connection: opts,
+    }
+    this.database = new DatabaseResource(dbopts)
   }
 }

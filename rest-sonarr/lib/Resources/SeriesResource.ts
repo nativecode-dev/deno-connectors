@@ -5,7 +5,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class SeriesResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   id(id: number): Promise<Series> {

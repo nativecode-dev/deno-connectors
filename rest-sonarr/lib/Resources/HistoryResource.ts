@@ -6,7 +6,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class HistoryResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   get(sortKey: string = 'date', options: PagingOptions = {}): Promise<History> {

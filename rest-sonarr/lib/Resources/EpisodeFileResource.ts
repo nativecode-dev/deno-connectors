@@ -6,7 +6,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class EpisodeFileResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   delete(episodeFileId: number) {

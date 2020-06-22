@@ -6,7 +6,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class ReleaseResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   download(guid: string, indexerId: string): Promise<Release[]> {

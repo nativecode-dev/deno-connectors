@@ -3,7 +3,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class DiskspaceResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   list(): Promise<Diskspace[]> {

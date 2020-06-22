@@ -5,7 +5,7 @@ import { RadarrResource } from '../RadarrResource.ts'
 
 export class QueueResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   delete(id: number, blacklist: boolean = false) {

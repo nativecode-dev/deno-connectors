@@ -7,7 +7,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class WantedMissingResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   list(sortKey: string = 'airDateUtc', options: PagingOptions = {}): Promise<Paging<WantedMissing>> {

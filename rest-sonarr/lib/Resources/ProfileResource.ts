@@ -3,7 +3,7 @@ import { SonarrResource } from '../SonarrResource.ts'
 
 export class ProfileResource extends SonarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   list(start?: string, end?: string): Promise<Profile[]> {

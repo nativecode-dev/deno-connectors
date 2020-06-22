@@ -6,7 +6,7 @@ import { RadarrResource } from '../RadarrResource.ts'
 
 export class MovieResource extends RadarrResource {
   constructor(url: URL, apikey: string) {
-    super(url, apikey)
+    super(apikey)
   }
 
   add(movie: MovieInfo): Promise<Movie> {
