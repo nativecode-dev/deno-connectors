@@ -22,27 +22,27 @@ const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
 
 const document: TestDocument = { name: 'method', value: { GET: 'get' } }
 const options = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, envobj.test.couchdb)
-const store = new CouchStore(options)
+const CLIENT = new CouchStore(options)
 
 Deno.test('[connect-couchdb] should create database', async () => {
-  await store.create('test-connect-couchdb')
+  await CLIENT.create('test-connect-couchdb')
 })
 
 Deno.test('[connect-couchdb] should get empty collection', async () => {
-  const collection = await store.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const collection = await CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const result = await collection.all()
   assertEquals(result, [])
 })
 
 Deno.test('[connect-couchdb] should add document', async () => {
-  const collection = await store.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const collection = await CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const docid = await collection.update(document, (doc) => doc.name!)
   const result = await collection.get(docid)
   assertEquals(result.name, document.name)
 })
 
 Deno.test('[connect-couchdb] should delete document', async () => {
-  const collection = await store.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const collection = await CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const doc = await collection.get(document.name)
   await collection.delete(doc._id!, doc._rev)
 
@@ -56,5 +56,5 @@ Deno.test('[connect-couchdb] should delete document', async () => {
 })
 
 Deno.test('[connect-couchdb] should delete database', async () => {
-  await store.delete('test-connect-couchdb')
+  await CLIENT.delete('test-connect-couchdb')
 })

@@ -3,9 +3,10 @@ import { Env, assertEquals } from '../test_deps.ts'
 
 import { CouchClient } from '../lib/CouchClient.ts'
 
-const env = new Env({ env: Deno.env.toObject(), prefix: ['TEST'] })
+const env = new Env({ env: Deno.env.toObject(), prefix: ['test'] })
+const envobj = env.toObject()
 
-const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
+const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
     host: 'localhost',
     port: 5984,
@@ -14,7 +15,9 @@ const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
   name: 'couchdb',
 }
 
-const CLIENT = new CouchClient(ObjectMerge.merge(OPTIONS, env.toObject().test.couchdb))
+const options = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, envobj.test.couchdb)
+console.log(options)
+const CLIENT = new CouchClient(options)
 
 Deno.test('[rest-couchdb] should create database', async () => {
   const response = await CLIENT.database.create('test-rest-couchdb')
