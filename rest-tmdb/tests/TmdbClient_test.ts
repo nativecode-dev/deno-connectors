@@ -15,7 +15,7 @@ const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
   name: 'tmdb',
 }
 
-const client = new TmdbClient(ObjectMerge.merge<ConnectorOptions>({}, OPTIONS, envobj.test.tmdb))
+const client = new TmdbClient(ObjectMerge.merge<ConnectorOptions>(OPTIONS, envobj.test.tmdb))
 
 Deno.test('should find Tenet by IMDb ID', async () => {
   const results = await client.find.byId('tt6723592', TmdbSources.imdb)
