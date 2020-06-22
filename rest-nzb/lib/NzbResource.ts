@@ -1,9 +1,9 @@
-import { Essentials, Resource, ResourceParam, ResourceParamType } from '../deps.ts'
+import { Essentials, RestResource, ResourceParam, ResourceParamType } from '../deps.ts'
 
 import { NzbOptions } from './NzbOptions.ts'
 import { SearchResult } from '../lib/Models/SearchResult.ts'
 
-export class NzbResource extends Resource<NzbOptions> {
+export class NzbResource extends RestResource<NzbOptions> {
   constructor(url: URL, options: Essentials.DeepPartial<NzbOptions> = {}) {
     super(url, options)
   }
@@ -81,7 +81,7 @@ export class NzbResource extends Resource<NzbOptions> {
   }
 
   protected async rpc(method: string, ...params: ResourceParam[]) {
-    const response = await this.response(`${this.url}api`, 'GET', [
+    const response = await this.response(this.url.toString(), 'GET', [
       ...params,
       {
         key: 'apikey',

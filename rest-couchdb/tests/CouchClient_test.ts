@@ -6,10 +6,6 @@ import { CouchClient } from '../lib/CouchClient.ts'
 const env = new Env({ env: Deno.env.toObject(), prefix: ['TEST'] })
 
 const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
-  credentials: {
-    password: '',
-    username: '',
-  },
   endpoint: {
     host: 'localhost',
     port: 5984,
@@ -20,22 +16,22 @@ const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
 
 const CLIENT = new CouchClient(ObjectMerge.merge(OPTIONS, env.toObject().test.couchdb))
 
-Deno.test('should create database', async () => {
-  const response = await CLIENT.database.create('plexify')
+Deno.test('[rest-couchdb] should create database', async () => {
+  const response = await CLIENT.database.create('test-rest-couchdb')
   assertEquals(response.ok, true)
 })
 
-Deno.test('should list databases', async () => {
+Deno.test('[rest-couchdb] should list databases', async () => {
   const response = await CLIENT.database.list()
   assertEquals(response.length, 1)
 })
 
-Deno.test('should create document', async () => {
-  const response = await CLIENT.database.document('plexify', { test: 'value' })
+Deno.test('[rest-couchdb] should create document', async () => {
+  const response = await CLIENT.database.document('test-rest-couchdb', { test: 'value' })
   assertEquals(response.ok, true)
 })
 
-Deno.test('should delete databases', async () => {
-  const response = await CLIENT.database.delete('plexify')
+Deno.test('[rest-couchdb] should delete databases', async () => {
+  const response = await CLIENT.database.delete('test-rest-couchdb')
   assertEquals(response.ok, true)
 })

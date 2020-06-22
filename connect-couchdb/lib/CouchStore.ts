@@ -1,4 +1,4 @@
-import { ConnectorOptions, CouchClient, Document, DocumentCollection, ConnectorHelpers } from '../deps.ts'
+import { ConnectorOptions, CouchClient, Document, DocumentCollection, UrlBuilder } from '../deps.ts'
 
 import { CouchCollection } from './CouchCollection.ts'
 
@@ -6,7 +6,7 @@ export class CouchStore implements CouchStore {
   protected readonly client: CouchClient
 
   constructor(options: ConnectorOptions) {
-    this.client = new CouchClient(ConnectorHelpers.buildUrl(options))
+    this.client = new CouchClient(new UrlBuilder(options).withAuthentication().toUrl())
   }
 
   async collection<T extends Document>(name: string, doctype: string): Promise<DocumentCollection<T>> {
