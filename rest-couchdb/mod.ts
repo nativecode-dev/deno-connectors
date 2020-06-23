@@ -1,7 +1,0 @@
-export * from './lib/CouchClient.ts'
-export * from './lib/CouchOptions.ts'
-export * from './lib/CouchResource.ts'
-export * from './lib/Resources/DatabaseResource.ts'
-export * from './lib/Resources/ServerResource.ts'
-export * from './lib/Responses/ActiveTasks.ts'
-export * from './lib/Responses/DatabaseInfo.ts'

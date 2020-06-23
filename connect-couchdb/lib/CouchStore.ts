@@ -6,7 +6,7 @@ export class CouchStore implements CouchStore {
   protected readonly client: CouchClient
 
   constructor(options: ConnectorOptions) {
-    this.client = new CouchClient(new UrlBuilder(options).withAuthentication().toUrl())
+    this.client = new CouchClient(new UrlBuilder(options).withAuthentication().withPort().toUrl())
   }
 
   async collection<T extends Document>(name: string, doctype: string): Promise<DocumentCollection<T>> {
