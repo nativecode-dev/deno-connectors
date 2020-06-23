@@ -1,6 +1,6 @@
 import { Credit } from '../Credit.ts'
 
-export interface Episode {
+export interface EpisodeResponse {
   air_date: string
   crew: Credit[]
   episode_number: number

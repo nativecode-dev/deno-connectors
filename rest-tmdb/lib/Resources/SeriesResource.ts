@@ -5,6 +5,8 @@ import { Credits } from '../Models/Credit.ts'
 import { TmdbResource } from '../TmdbResource.ts'
 
 import { Series } from '../Models/Series/Series.ts'
+import { SeasonResponse } from '../Models/Series/SeasonResponse.ts'
+import { EpisodeResponse } from '../Models/Series/EpisodeResponse.ts'
 import { ExternalSeriesSources } from '../Models/Series/ExternalSeriesSources.ts'
 import { AlternativeSeriesTitles } from '../Models/Series/AlternativeSeriesTitle.ts'
 
@@ -41,6 +43,27 @@ export class SeriesResource extends TmdbResource {
     })
   }
 
+  episode(id: number, season: number, episode: number) {
+    return this.http_get<EpisodeResponse>(
+      'tv/{:tv_id}/season/{:season_number}/episode/{:episode_number}',
+      {
+        key: 'tv_id',
+        type: ResourceParamType.RouteParameter,
+        value: id,
+      },
+      {
+        key: 'season_number',
+        type: ResourceParamType.RouteParameter,
+        value: season,
+      },
+      {
+        key: 'episode_number',
+        type: ResourceParamType.RouteParameter,
+        value: episode,
+      },
+    )
+  }
+
   externals(id: number) {
     return this.http_get<ExternalSeriesSources>('tv/{:tv_id}/external_ids', {
       key: 'tv_id',
@@ -55,5 +78,21 @@ export class SeriesResource extends TmdbResource {
       type: ResourceParamType.RouteParameter,
       value: id,
     })
+  }
+
+  season(id: number, season: number) {
+    return this.http_get<SeasonResponse>(
+      'tv/{:tv_id}/season/{:season_number}',
+      {
+        key: 'tv_id',
+        type: ResourceParamType.RouteParameter,
+        value: id,
+      },
+      {
+        key: 'season_number',
+        type: ResourceParamType.RouteParameter,
+        value: season,
+      },
+    )
   }
 }

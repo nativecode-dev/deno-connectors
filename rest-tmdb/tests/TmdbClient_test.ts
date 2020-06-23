@@ -75,6 +75,16 @@ Deno.test('should find 24 images', async () => {
   assertEquals(results.id, SERIESID)
 })
 
+Deno.test('should find 24 season', async () => {
+  const results = await client.series.season(SERIESID, 1)
+  assertEquals(results.episodes.length, 24)
+})
+
+Deno.test('should find 24 season', async () => {
+  const results = await client.series.episode(SERIESID, 1, 1)
+  assertEquals(results.name, '12:00 A.M.-1:00 A.M.')
+})
+
 Deno.test('should get movie genres', async () => {
   const results = await client.genre.movies()
   assertNotEquals(results.genres.length, 0)
