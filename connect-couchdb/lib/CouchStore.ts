@@ -11,7 +11,7 @@ export class CouchStore implements CouchStore {
 
   async collection<T extends Document>(name: string, doctype: string): Promise<DocumentCollection<T>> {
     const collection = this.client.database<T>(name)
-    return new CouchCollection(doctype, collection)
+    return new CouchCollection<T>(doctype, collection)
   }
 
   async create(name: string) {
