@@ -1,0 +1,1 @@
+import './tests/TmdbClient_test.ts'
