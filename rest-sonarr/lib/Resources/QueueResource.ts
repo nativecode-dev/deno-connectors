@@ -2,10 +2,11 @@ import { ResourceParamType } from '../../deps.ts'
 
 import { Queue } from '../Models/Queue.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class QueueResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   delete(id: number, blacklist: boolean = false) {

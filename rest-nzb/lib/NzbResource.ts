@@ -81,7 +81,7 @@ export class NzbResource extends RestResource<NzbOptions> {
   }
 
   protected async rpc(method: string, ...params: ResourceParam[]) {
-    const response = await this.response(this.url.toString(), 'GET', [
+    const response = await this.response('/', 'GET', [
       ...params,
       {
         key: 'apikey',

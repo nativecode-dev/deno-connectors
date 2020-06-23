@@ -2,10 +2,11 @@ import { ResourceParamType } from '../../deps.ts'
 
 import { Indexer } from '../Models/Indexer.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class IndexerResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   indexer(id: number): Promise<Indexer> {

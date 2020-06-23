@@ -3,10 +3,11 @@ import { ResourceParamType } from '../../deps.ts'
 import { EpisodeFile } from '../Models/EpisodeFile.ts'
 import { EpisodeFileQuality } from '../Models/EpisodeFileQuality.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class EpisodeFileResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   delete(episodeFileId: number) {

@@ -3,8 +3,11 @@ import { RestResource } from '../deps.ts'
 import { SonarrOptions } from './SonarrOptions.ts'
 
 export abstract class SonarrResource extends RestResource<SonarrOptions> {
-  constructor(apikey: string) {
-    super({ apikey })
-    this.setHeader('X-Api-Key', apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
+
+    if (options.connection.credentials?.password) {
+      this.setHeader('X-Api-Key', options.connection.credentials?.password)
+    }
   }
 }

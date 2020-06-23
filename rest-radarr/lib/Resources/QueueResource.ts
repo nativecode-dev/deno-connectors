@@ -2,10 +2,11 @@ import { ResourceParamType } from '../../deps.ts'
 
 import { Queue } from '../Models/Queue.ts'
 import { RadarrResource } from '../RadarrResource.ts'
+import { RadarrOptions } from '../RadarrOptions.ts'
 
 export class QueueResource extends RadarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: RadarrOptions) {
+    super(options)
   }
 
   delete(id: number, blacklist: boolean = false) {

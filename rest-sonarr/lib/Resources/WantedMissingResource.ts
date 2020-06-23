@@ -4,10 +4,11 @@ import { Paging } from '../Models/Paging.ts'
 import { WantedMissing } from '../Models/WantedMissing.ts'
 import { PagingOptions } from './PagingOptions.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class WantedMissingResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   list(sortKey: string = 'airDateUtc', options: PagingOptions = {}): Promise<Paging<WantedMissing>> {

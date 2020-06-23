@@ -7,9 +7,9 @@ import { FindResults } from '../Models/FindResults.ts'
 export class FindResource extends TmdbResource {
   byId(externalId: string, source: TmdbSources = TmdbSources.imdb, language: string = 'en-US'): Promise<FindResults> {
     return this.http_get<FindResults>(
-      'find/{:externalId}',
+      'find/{:external_id}',
       {
-        key: 'externalId',
+        key: 'external_id',
         type: ResourceParamType.RouteParameter,
         value: externalId,
       },

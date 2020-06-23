@@ -11,12 +11,7 @@ import { IndexerResource } from './Resources/IndexerResource.ts'
 import { CalendarResource } from './Resources/CalendarResource.ts'
 import { DiskspaceResource } from './Resources/DiskspaceResource.ts'
 
-const DefaultRadarrOptions: Partial<RadarrOptions> = {
-  apikey: '',
-  host: 'localhost',
-  port: 7878,
-  secure: false,
-}
+const DefaultRadarrOptions: Partial<RadarrOptions> = {}
 
 export class RadarrClient {
   private readonly options: RadarrOptions
@@ -32,14 +27,13 @@ export class RadarrClient {
   constructor(options: Essentials.DeepPartial<RadarrOptions>) {
     this.options = ObjectMerge.merge<RadarrOptions>(DefaultRadarrOptions, options)
 
-    const url = this.url()
-    this.calendar = new CalendarResource(url, this.options.apikey)
-    this.diskspace = new DiskspaceResource(url, this.options.apikey)
-    this.history = new HistoryResource(url, this.options.apikey)
-    this.indexer = new IndexerResource(url, this.options.apikey)
-    this.movie = new MovieResource(url, this.options.apikey)
-    this.profile = new ProfileResource(url, this.options.apikey)
-    this.system = new SystemResource(url, this.options.apikey)
+    this.calendar = new CalendarResource(this.options)
+    this.diskspace = new DiskspaceResource(this.options)
+    this.history = new HistoryResource(this.options)
+    this.indexer = new IndexerResource(this.options)
+    this.movie = new MovieResource(this.options)
+    this.profile = new ProfileResource(this.options)
+    this.system = new SystemResource(this.options)
   }
 
   async unmonitor(dryrun: boolean): Promise<Movie[]> {
@@ -74,10 +68,5 @@ export class RadarrClient {
     }
 
     throw new Error(`profile ${movie.profileId} not found`)
-  }
-
-  private url() {
-    const protocol = this.options.secure ? 'https' : 'http'
-    return new URL(`${protocol}://${this.options.host}:${this.options.port}/api`)
   }
 }

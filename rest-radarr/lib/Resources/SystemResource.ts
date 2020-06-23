@@ -1,9 +1,10 @@
 import { SystemStatus } from '../Models/SystemStatus.ts'
 import { RadarrResource } from '../RadarrResource.ts'
+import { RadarrOptions } from '../RadarrOptions.ts'
 
 export class SystemResource extends RadarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: RadarrOptions) {
+    super(options)
   }
 
   status(): Promise<SystemStatus> {

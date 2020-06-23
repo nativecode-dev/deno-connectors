@@ -1,5 +1,5 @@
 import { Essentials, ConnectorOptions, ConnectorProtocols, ObjectMerge } from '../deps.ts'
-import { Env, assertEquals, assertNotEquals } from '../test_deps.ts'
+import { Env, assertEquals, assertNotEquals } from '../deps_test.ts'
 
 import { NzbClient } from '../lib/NzbClient.ts'
 
@@ -17,22 +17,22 @@ const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
 
 const client = new NzbClient(ObjectMerge.merge<ConnectorOptions>(OPTIONS, envobj.test.nzb))
 
-Deno.test('should get capabilities', async () => {
+Deno.test('[rest-nzb] should get capabilities', async () => {
   const response = await client.nzb.capabilities()
-  assertEquals(response.server['@attributes'].appversion, '2.23.0')
+  assertEquals(response.server['@attributes'].appversion, '2.24.0')
 })
 
-Deno.test('should search movies', async () => {
+Deno.test('[rest-nzb] should search movies', async () => {
   const response = await client.nzb.movies('tt6723592', [])
   assertNotEquals(response.channel.item.length, 0)
 })
 
-Deno.test('should search shows', async () => {
+Deno.test('[rest-nzb] should search shows', async () => {
   const response = await client.nzb.shows('24')
   assertNotEquals(response.channel.item.length, 0)
 })
 
-Deno.test('should get nzb details', async () => {
+Deno.test('[rest-nzb] should get nzb details', async () => {
   const response = await client.nzb.shows('24', 1, 1)
   const result = response.channel.item[0]
   const details = await client.nzb.details(result.guid)

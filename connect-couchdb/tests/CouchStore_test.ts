@@ -1,5 +1,5 @@
 import { ConnectorOptions, ConnectorProtocols, Document, Env, Essentials, ObjectMerge } from '../deps.ts'
-import { assertEquals, assertThrowsAsync } from '../test_deps.ts'
+import { assertEquals, assertThrowsAsync } from '../deps_test.ts'
 
 import { CouchStore } from '../mod.ts'
 

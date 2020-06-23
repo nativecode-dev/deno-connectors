@@ -2,10 +2,11 @@ import { ResourceParamType } from '../../deps.ts'
 
 import { Backup } from '../Models/Backup.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class BackupResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   list(): Promise<Backup[]> {

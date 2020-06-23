@@ -1,9 +1,10 @@
 import { SystemStatus } from '../Models/SystemStatus.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class SystemResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   status(): Promise<SystemStatus> {

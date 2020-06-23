@@ -1,9 +1,10 @@
 import { Diskspace } from '../Models/Diskspace.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class DiskspaceResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   list(): Promise<Diskspace[]> {

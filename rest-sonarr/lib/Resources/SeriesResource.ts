@@ -2,10 +2,11 @@ import { ResourceParamType } from '../../deps.ts'
 
 import { Series } from '../Models/Series.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class SeriesResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   id(id: number): Promise<Series> {

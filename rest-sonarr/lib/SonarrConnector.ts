@@ -11,6 +11,6 @@ const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
 }
 
 export function SonarrConnector(options: Essentials.DeepPartial<ConnectorOptions>) {
-  const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
-  return new SonarrClient({ host: opts.endpoint.host, port: opts.endpoint.port, apikey: opts.credentials?.password })
+  const connection = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
+  return new SonarrClient({ apikey: connection.credentials?.password, connection })
 }

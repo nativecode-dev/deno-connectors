@@ -2,10 +2,11 @@ import { ResourceParamType } from '../../deps.ts'
 
 import { Episode } from '../Models/Episode.ts'
 import { SonarrResource } from '../SonarrResource.ts'
+import { SonarrOptions } from '../SonarrOptions.ts'
 
 export class CalendarResource extends SonarrResource {
-  constructor(url: URL, apikey: string) {
-    super(apikey)
+  constructor(options: SonarrOptions) {
+    super(options)
   }
 
   list(start?: string, end?: string): Promise<Episode[]> {

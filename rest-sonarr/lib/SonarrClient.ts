@@ -18,11 +18,7 @@ import { EpisodeFileResource } from './Resources/EpisodeFileResource.ts'
 import { WantedMissingResource } from './Resources/WantedMissingResource.ts'
 import { ParsedEpisodeInfoResource } from './Resources/ParsedEpisodeInfoResource.ts'
 
-const DefaultSonarrOptions: Partial<SonarrOptions> = {
-  host: 'localhost',
-  port: 8989,
-  secure: false,
-}
+const DefaultSonarrOptions: Partial<SonarrOptions> = {}
 
 export interface SeriesInfo {
   [key: number]: Episode[]
@@ -50,21 +46,20 @@ export class SonarrClient {
   constructor(options: Essentials.DeepPartial<SonarrOptions>) {
     this.options = ObjectMerge.merge<SonarrOptions>(DefaultSonarrOptions, options)
 
-    const url = this.url()
-    this.backup = new BackupResource(url, this.options.apikey)
-    this.calendar = new CalendarResource(url, this.options.apikey)
-    this.command = new CommandResource(url, this.options.apikey)
-    this.diskspace = new DiskspaceResource(url, this.options.apikey)
-    this.episodes = new EpisodeResource(url, this.options.apikey)
-    this.files = new EpisodeFileResource(url, this.options.apikey)
-    this.history = new HistoryResource(url, this.options.apikey)
-    this.indexer = new IndexerResource(url, this.options.apikey)
-    this.parser = new ParsedEpisodeInfoResource(url, this.options.apikey)
-    this.profile = new ProfileResource(url, this.options.apikey)
-    this.release = new ReleaseResource(url, this.options.apikey)
-    this.series = new SeriesResource(url, this.options.apikey)
-    this.system = new SystemResource(url, this.options.apikey)
-    this.wanted = new WantedMissingResource(url, this.options.apikey)
+    this.backup = new BackupResource(this.options)
+    this.calendar = new CalendarResource(this.options)
+    this.command = new CommandResource(this.options)
+    this.diskspace = new DiskspaceResource(this.options)
+    this.episodes = new EpisodeResource(this.options)
+    this.files = new EpisodeFileResource(this.options)
+    this.history = new HistoryResource(this.options)
+    this.indexer = new IndexerResource(this.options)
+    this.parser = new ParsedEpisodeInfoResource(this.options)
+    this.profile = new ProfileResource(this.options)
+    this.release = new ReleaseResource(this.options)
+    this.series = new SeriesResource(this.options)
+    this.system = new SystemResource(this.options)
+    this.wanted = new WantedMissingResource(this.options)
   }
 
   async unmonitor(dryrun: boolean) {
@@ -100,10 +95,5 @@ export class SonarrClient {
       },
       { series },
     )
-  }
-
-  private url() {
-    const protocol = this.options.secure ? 'https' : 'http'
-    return new URL(`${protocol}://${this.options.host}:${this.options.port}/api`)
   }
 }
