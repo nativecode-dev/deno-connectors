@@ -6,6 +6,7 @@ const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
     host: 'api.themoviedb.org',
     path: '3',
+    protocol: 'https',
   },
   name: 'tmdb',
 }
