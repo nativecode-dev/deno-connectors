@@ -16,12 +16,14 @@ export class CouchClient {
   public readonly database: DatabaseResource
 
   constructor(options: Essentials.DeepPartial<ConnectorOptions>) {
-    const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
+    const connection = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
+
     const dbopts: Essentials.DeepPartial<CouchOptions> = {
-      password: opts.credentials?.password,
-      username: opts.credentials?.username,
-      connection: opts,
+      connection,
+      password: connection.credentials?.password,
+      username: connection.credentials?.username,
     }
+
     this.database = new DatabaseResource(dbopts)
   }
 }

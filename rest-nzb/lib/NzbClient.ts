@@ -17,8 +17,8 @@ export class NzbClient {
   public readonly nzb: NzbResource
 
   constructor(options: Essentials.DeepPartial<ConnectorOptions>) {
-    const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
-    const resopts: Essentials.DeepPartial<NzbOptions> = { apikey: opts.credentials?.password, connection: opts }
+    const connection = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
+    const resopts: Essentials.DeepPartial<NzbOptions> = { apikey: connection.credentials?.password, connection }
     this.nzb = new NzbResource(resopts)
   }
 }

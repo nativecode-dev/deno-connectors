@@ -1,4 +1,4 @@
-import { ConnectorOptions, Essentials, ObjectMerge, UrlBuilder } from '../deps.ts'
+import { ConnectorOptions, Essentials, ObjectMerge } from '../deps.ts'
 
 import { FindResource } from './Resources/FindResource.ts'
 
@@ -14,7 +14,7 @@ export class TmdbClient {
   readonly find: FindResource
 
   constructor(options: Essentials.DeepPartial<ConnectorOptions>) {
-    const opts = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
-    this.find = new FindResource({ bearer: opts.credentials?.password, connection: opts })
+    const connection = ObjectMerge.merge<ConnectorOptions>(DEFAULTS, options)
+    this.find = new FindResource({ bearer: connection.credentials?.password, connection: connection })
   }
 }
