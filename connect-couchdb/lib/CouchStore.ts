@@ -29,4 +29,8 @@ export class CouchStore implements CouchStore {
       throw new Error(`could not create database: ${name}`)
     }
   }
+
+  exists(name: string) {
+    return this.client.databaseExists(name)
+  }
 }
