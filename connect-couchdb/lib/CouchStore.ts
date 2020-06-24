@@ -9,7 +9,7 @@ export class CouchStore implements CouchStore {
     this.client = new CouchClient(new UrlBuilder(options).withAuthentication().withPort().toUrl())
   }
 
-  async collection<T extends Document>(name: string, doctype: string): Promise<DocumentCollection<T>> {
+  collection<T extends Document>(name: string, doctype: string): DocumentCollection<T> {
     const collection = this.client.database<T>(name)
     return new CouchCollection<T>(doctype, collection)
   }
