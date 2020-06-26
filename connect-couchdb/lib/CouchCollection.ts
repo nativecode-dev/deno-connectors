@@ -30,15 +30,30 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
   }
 
   async update(document: Essentials.DeepPartial<T>, dockey: DocumentKey<T>): Promise<T> {
-    const docid = { _id: dockey(document), doctype: this.doctype } as Essentials.DeepPartial<T>
-    const doc = ObjectMerge.merge<T>(docid, document)
-    const response = await this.collection.put(docid._id!, doc)
+    const id = dockey(document)
+    const docid = { _id: id, doctype: this.doctype } as Essentials.DeepPartial<T>
+    const doc = ObjectMerge.merge<T>(document, docid)
 
-    if (response.ok === false) {
-      throw new Error(`could not update document with id: ${docid._id!}`)
+    if (doc._rev === undefined) {
+      const response = await this.collection.put(id, doc)
+
+      if (response.ok === false) {
+        throw new Error(`could not update document with id: ${id}`)
+      }
+
+      doc._rev = response.rev
     }
 
-    const item = await this.collection.get(response.id, { rev: response.rev })
+    const item = await this.collection.get(id)
+
+    if (doc.rev) {
+      const response = await this.collection.put(id, doc, { rev: doc.rev })
+
+      if (response.ok === false) {
+        throw new Error(`could not update document with id: ${id}`)
+      }
+    }
+
     return item as T
   }
 }

@@ -1,5 +1,5 @@
 import { ConnectorOptions, ConnectorProtocols, Document, Env, Essentials, ObjectMerge } from '../deps.ts'
-import { assertEquals, assertNotEquals, assertThrowsAsync } from '../deps_test.ts'
+import { assertEquals, assertNotEquals } from '../deps_test.ts'
 
 import { CouchStore } from '../mod.ts'
 
@@ -41,6 +41,14 @@ Deno.test('[connect-couchdb] should add document', async () => {
   assertNotEquals(result, null)
 })
 
+Deno.test('[connect-couchdb] should update document', async () => {
+  const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const original = await collection.get(document._id!)
+  const docid = await collection.update({ ...original, value: 'changed' }, (doc) => doc.name!)
+  const result = await collection.get(docid._id!)
+  assertEquals(result?.value, 'changed')
+})
+
 Deno.test('[connect-couchdb] should delete document', async () => {
   const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const doc = await collection.get(document.name)
@@ -49,13 +57,8 @@ Deno.test('[connect-couchdb] should delete document', async () => {
     await collection.delete(doc._id!, doc._rev)
   }
 
-  await assertThrowsAsync(
-    async () => {
-      await collection.get(document.name)
-    },
-    undefined,
-    'not_found',
-  )
+  const value = await collection.get(document.name)
+  assertEquals(value, null)
 })
 
 Deno.test('[connect-couchdb] should delete database', async () => {
