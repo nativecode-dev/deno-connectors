@@ -29,20 +29,20 @@ Deno.test('[connect-couchdb] should create database', async () => {
 })
 
 Deno.test('[connect-couchdb] should get empty collection', async () => {
-  const collection = await CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const result = await collection.all()
   assertEquals(result, [])
 })
 
 Deno.test('[connect-couchdb] should add document', async () => {
-  const collection = await CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const docid = await collection.update(document, (doc) => doc.name!)
   const result = await collection.get(docid._id!)
   assertEquals(result.name, document.name)
 })
 
 Deno.test('[connect-couchdb] should delete document', async () => {
-  const collection = await CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const doc = await collection.get(document.name)
   await collection.delete(doc._id!, doc._rev)
 

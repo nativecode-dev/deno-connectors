@@ -20,9 +20,13 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
     }
   }
 
-  async get(id: string): Promise<T> {
-    const document = await this.collection.get(id)
-    return document as T
+  async get(id: string): Promise<T | null> {
+    try {
+      const document = await this.collection.get(id)
+      return document as T
+    } catch {
+      return null
+    }
   }
 
   async update(document: Essentials.DeepPartial<T>, dockey: DocumentKey<T>): Promise<T> {
