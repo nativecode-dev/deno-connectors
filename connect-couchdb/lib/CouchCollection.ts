@@ -30,7 +30,7 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
   }
 
   async update(document: Essentials.DeepPartial<T>, dockey: DocumentKey<T>): Promise<T> {
-    const id = dockey(document)
+    const id = dockey(ObjectMerge.merge<T>(document))
     const original = (await this.get(id)) as T
 
     if (original) {
