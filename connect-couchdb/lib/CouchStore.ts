@@ -6,7 +6,8 @@ export class CouchStore implements CouchStore {
   protected readonly client: CouchClient
 
   constructor(options: ConnectorOptions) {
-    this.client = new CouchClient(new UrlBuilder(options).withAuthentication().withPort().toUrl())
+    const builder = new UrlBuilder(options).withAuthentication().withPort().toUrl()
+    this.client = new CouchClient(builder)
   }
 
   collection<T extends Document>(name: string, doctype: string): DocumentCollection<T> {

@@ -6,7 +6,7 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
   }
 
   async all(): Promise<T[]> {
-    const selector = { selector: { doctype: this.doctype } }
+    const selector = { doctype: this.doctype }
     const options = { limit: Number.MAX_SAFE_INTEGER }
     const response = await this.collection.find<T>(selector, options)
     return response.docs || []

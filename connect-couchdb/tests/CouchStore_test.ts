@@ -41,6 +41,12 @@ Deno.test('[connect-couchdb] should add document', async () => {
   assertNotEquals(result, null)
 })
 
+Deno.test('[connect-couchdb] should get non-empty collection', async () => {
+  const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
+  const result = await collection.all()
+  assertEquals(result.length, 1)
+})
+
 Deno.test('[connect-couchdb] should update document', async () => {
   const collection = CLIENT.collection<TestDocument>('test-connect-couchdb', 'test-document')
   const original = await collection.get(document._id!)
