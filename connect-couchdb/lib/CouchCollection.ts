@@ -1,4 +1,13 @@
-import { Document, DocumentCollection, DocumentKey, CouchDatabase, Essentials, ObjectMerge } from '../deps.ts'
+import {
+  Document,
+  DocumentCollection,
+  DocumentKeySelector,
+  DocumentFindOptions,
+  DocumentSelector,
+  CouchDatabase,
+  Essentials,
+  ObjectMerge,
+} from '../deps.ts'
 
 export class CouchCollection<T extends Document> implements DocumentCollection<T> {
   constructor(private readonly doctype: string, private readonly collection: CouchDatabase<T>) {
@@ -7,9 +16,8 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
 
   async all(): Promise<T[]> {
     const selector = { doctype: this.doctype }
-    const options = { limit: Number.MAX_SAFE_INTEGER }
-    const response = await this.collection.find<T>(selector, options)
-    return response.docs || []
+    const options = { limit: Number.MAX_SAFE_INTEGER, skip: 0 }
+    return (await this.collection.find<T>(selector, options)).docs
   }
 
   async delete(id: string, rev: string): Promise<void> {
@@ -18,6 +26,10 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
     if (response.ok === false) {
       throw new Error(`could not delete document with id: ${id}`)
     }
+  }
+
+  async find(selector: DocumentSelector, options: DocumentFindOptions = { skip: 0, take: 20 }): Promise<T[]> {
+    return (await this.collection.find<T>(selector, options)).docs
   }
 
   async get(id: string): Promise<T | null> {
@@ -29,7 +41,7 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
     }
   }
 
-  async update(document: Essentials.DeepPartial<T>, dockey: DocumentKey<T>): Promise<T> {
+  async update(document: Essentials.DeepPartial<T>, dockey: DocumentKeySelector<T>): Promise<T> {
     const id = dockey(ObjectMerge.merge<T>(document))
     const original = (await this.get(id)) as T
 
