@@ -1,4 +1,5 @@
 import {
+  BError,
   Document,
   DocumentCollection,
   DocumentKeySelector,
@@ -24,7 +25,7 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
     const response = await this.collection.delete(id, rev)
 
     if (response.ok === false) {
-      throw new Error(`could not delete document with id: ${id}`)
+      throw new BError(`could not delete document with id: ${id}`)
     }
   }
 
@@ -50,7 +51,7 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
       const response = await this.collection.put(id, updated, { rev: updated.rev })
 
       if (response.ok === false) {
-        throw new Error(`could not update document with id: ${id}`)
+        throw new BError(`could not update document with id: ${id}`)
       }
 
       return (await this.get(id)) as T
@@ -61,7 +62,7 @@ export class CouchCollection<T extends Document> implements DocumentCollection<T
     const response = await this.collection.put(id, doc)
 
     if (response.ok === false) {
-      throw new Error(`could not update document with id: ${id}`)
+      throw new BError(`could not update document with id: ${id}`)
     }
 
     return (await this.get(id)) as T

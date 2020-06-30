@@ -1,4 +1,4 @@
-import { ConnectorOptions, CouchClient, Document, DocumentCollection, UrlBuilder } from '../deps.ts'
+import { BError, ConnectorOptions, CouchClient, Document, DocumentCollection, UrlBuilder } from '../deps.ts'
 
 import { CouchCollection } from './CouchCollection.ts'
 
@@ -11,23 +11,30 @@ export class CouchStore implements CouchStore {
   }
 
   collection<T extends Document>(name: string, doctype: string): DocumentCollection<T> {
-    const collection = this.client.database<T>(name)
-    return new CouchCollection<T>(doctype, collection)
+    return new CouchCollection<T>(doctype, this.client.database<T>(name))
   }
 
   async create(name: string) {
-    const result = await this.client.createDatabase(name)
+    try {
+      const result = await this.client.createDatabase(name)
 
-    if (result.ok === false) {
-      throw new Error(`could not create database: ${name}`)
+      if (result.ok === false) {
+        throw new BError(`could not create database: ${name}`)
+      }
+    } catch (error) {
+      throw new BError(`create database failed: ${name}`, error)
     }
   }
 
   async delete(name: string) {
-    const result = await this.client.deleteDatabase(name)
+    try {
+      const result = await this.client.deleteDatabase(name)
 
-    if (result.ok === false) {
-      throw new Error(`could not create database: ${name}`)
+      if (result.ok === false) {
+        throw new BError(`could not create database: ${name}`)
+      }
+    } catch (error) {
+      throw new BError(`delete database failed: ${name}`, error)
     }
   }
 
