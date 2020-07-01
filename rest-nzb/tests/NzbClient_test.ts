@@ -19,7 +19,7 @@ const client = new NzbClient(ObjectMerge.merge<ConnectorOptions>(OPTIONS, envobj
 
 Deno.test('[rest-nzb] should get capabilities', async () => {
   const response = await client.nzb.capabilities()
-  assertEquals(response.server['@attributes'].appversion, '2.24.0')
+  assertEquals(response.server['@attributes'].appversion, '2.24.1')
 })
 
 Deno.test('[rest-nzb] should search movies', async () => {
