@@ -7,8 +7,8 @@ stages:
 test:
   stage: test
   script:
-    - deno run --allow-net http://deno.land/x/gh:nativecode-dev:dent/status-check/mod_run.ts http://localhost:5984 http://localhost:7878 http://localhost:8989
-    - deno run --allow-env --allow-read --allow-write --unstable http://deno.land/x/gh:nativecode-dev:dent/dent-cli/mod_run.ts refresh --log
+    - deno run --allow-net https://raw.githubusercontent.com/nativecode-dev/dent/master/status-check/mod_run.ts http://localhost:5984 http://localhost:7878 http://localhost:8989
+    - deno run --allow-env --allow-read --allow-write --unstable https://raw.githubusercontent.com/nativecode-dev/dent/master/dent-cli/mod_run.ts refresh --log
     - deno cache mod.ts
     - deno test --allow-env --allow-net --allow-read --allow-write
   services:

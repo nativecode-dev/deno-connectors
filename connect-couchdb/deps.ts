@@ -1,5 +1,5 @@
 export { BError } from 'https://deno.land/x/berror/berror.ts'
-export { CouchClient, CouchDatabase } from 'https://deno.land/x/gh:nativecode-dev:deno-couchdb/couch.ts'
+export { CouchClient, CouchDatabase } from 'https://raw.githubusercontent.com/nativecode-dev/deno-couchdb/master/couch.ts'
 export { ConnectorOptions, ConnectorProtocols } from 'https://raw.githubusercontent.com/nativecode-dev/dent/master/connector/mod.ts'
 export { Env, EnvOptions } from 'https://raw.githubusercontent.com/nativecode-dev/dent/master/env/mod.ts'
 export { ObjectMerge } from 'https://raw.githubusercontent.com/nativecode-dev/dent/master/object-merge/mod.ts'
