@@ -9,8 +9,8 @@ test:
   script:
     - deno run --allow-net https://raw.githubusercontent.com/nativecode-dev/dent/v0.0.0/status-check/mod_run.ts http://localhost:5984 http://localhost:7878 http://localhost:8989
     - deno run --allow-env --allow-read --allow-write --unstable https://raw.githubusercontent.com/nativecode-dev/dent/v0.0.0/dent-cli/mod_run.ts refresh --log
-    - deno cache mod.ts
-    - deno test --allow-env --allow-net --allow-read --allow-write
+    - deno cache --unstable mod.ts
+    - deno test --allow-env --allow-net --allow-read --allow-write --unstable
   services:
     - couchdb:2
     - nativecode/test-radarr:latest
