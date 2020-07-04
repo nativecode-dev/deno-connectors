@@ -39,6 +39,10 @@ export class CouchStore implements CouchStore {
   }
 
   exists(name: string) {
-    return this.client.databaseExists(name)
+    try {
+      return this.client.databaseExists(name)
+    } catch (error) {
+      throw new BError('exists', error)
+    }
   }
 }
