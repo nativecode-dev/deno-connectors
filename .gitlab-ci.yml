@@ -19,8 +19,8 @@ test:
     - nativecode/test-radarr:latest
     - nativecode/test-sonarr:latest
   variables:
-    COUCHDB_USER: admin
-    COUCHDB_PASSWORD: password
+    COUCHDB_USER: guest
+    COUCHDB_PASSWORD: guest
 
 prerelease:
   stage: publish
