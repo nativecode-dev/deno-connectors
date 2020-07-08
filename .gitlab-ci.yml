@@ -9,6 +9,9 @@ variables:
 
 .configure-publish:
   stage: publish
+  artifacts:
+    paths:
+      - dist
   before_script:
     - source .ci-env.sh
     - bash .citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}
@@ -39,9 +42,6 @@ prerelease:
     - git push --follow-tags origin develop
   only:
     - develop
-  artifacts:
-    paths:
-      - dist
 
 release:
   extends: .configure-publish
@@ -49,6 +49,3 @@ release:
     - git push --follow-tags origin master
   only:
     - master
-  artifacts:
-    paths:
-      - dist
