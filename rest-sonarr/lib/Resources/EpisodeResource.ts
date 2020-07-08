@@ -3,10 +3,14 @@ import { ResourceParamType } from '../../deps.ts'
 import { Episode } from '../Models/Episode.ts'
 import { SonarrResource } from '../SonarrResource.ts'
 import { SonarrOptions } from '../SonarrOptions.ts'
+import { EpisodeFileResource } from './EpisodeFileResource.ts'
 
 export class EpisodeResource extends SonarrResource {
+  public readonly files: EpisodeFileResource
+
   constructor(options: SonarrOptions) {
     super(options)
+    this.files = new EpisodeFileResource(this.options)
   }
 
   id(episodeId: number): Promise<Episode> {
