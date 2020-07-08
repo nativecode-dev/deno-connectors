@@ -36,7 +36,6 @@ export class SonarrClient {
 
   constructor(options: Essentials.DeepPartial<SonarrOptions>) {
     this.options = ObjectMerge.merge<SonarrOptions>(DefaultSonarrOptions, options)
-    console.log(this.options)
 
     this.backup = new BackupResource(this.options)
     this.calendar = new CalendarResource(this.options)

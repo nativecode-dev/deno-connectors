@@ -9,6 +9,7 @@ const envobj = env.toObject()
 const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
     host: 'localhost',
+    path: 'api',
     port: 8989,
     protocol: ConnectorProtocols.http,
   },

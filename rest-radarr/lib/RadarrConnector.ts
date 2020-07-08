@@ -5,6 +5,7 @@ import { RadarrClient } from './RadarrClient.ts'
 const DEFAULTS: Essentials.DeepPartial<ConnectorOptions> = {
   endpoint: {
     host: 'localhost',
+    path: 'api',
     port: 7878,
     protocol: ConnectorProtocols.http,
   },
