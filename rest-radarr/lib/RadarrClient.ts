@@ -26,6 +26,7 @@ export class RadarrClient {
 
   constructor(options: Essentials.DeepPartial<RadarrOptions>) {
     this.options = ObjectMerge.merge<RadarrOptions>(DefaultRadarrOptions, options)
+    console.log(this.options)
 
     this.calendar = new CalendarResource(this.options)
     this.diskspace = new DiskspaceResource(this.options)

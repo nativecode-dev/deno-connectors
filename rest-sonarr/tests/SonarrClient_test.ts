@@ -1,5 +1,5 @@
 import { Essentials, ConnectorOptions, ConnectorProtocols, ObjectMerge } from '../deps.ts'
-import { Env, assertEquals, assertNotEquals } from '../deps_test.ts'
+import { Env, assertNotEquals } from '../deps_test.ts'
 
 import { SonarrConnector } from '../lib/SonarrConnector.ts'
 
