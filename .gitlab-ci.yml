@@ -14,6 +14,8 @@ variables:
     - bash .citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}
     - bash .citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}
     - mkdir dist
+    - deno bundle --unstable mod.ts dist/mod.ts
+    - npx standard-version
 
 test:
   stage: test
@@ -34,8 +36,6 @@ prerelease:
   extends: .configure-publish
   stage: publish
   script:
-    - deno bundle --unstable mod.ts dist/mod.ts
-    - npx standard-version --prerelease beta
     - git push --follow-tags origin develop
   only:
     - develop
@@ -46,8 +46,6 @@ prerelease:
 release:
   extends: .configure-publish
   script:
-    - deno bundle --unstable mod.ts dist/mod.ts
-    - npx standard-version
     - git push --follow-tags origin master
   only:
     - master
