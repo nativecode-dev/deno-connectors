@@ -7,7 +7,7 @@ stages:
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
-.configure-publish: &pubilsh
+.configure-publish:
   stage: publish
   script:
     - source .ci-env.sh
