@@ -12,7 +12,7 @@ const OPTIONS: Essentials.DeepPartial<ConnectorOptions> = {
     port: 7878,
     protocol: ConnectorProtocols.http,
   },
-  name: 'sonarr',
+  name: 'radarr',
 }
 
 const client = RadarrConnector(ObjectMerge.merge(OPTIONS, envobj.test.radarr))
