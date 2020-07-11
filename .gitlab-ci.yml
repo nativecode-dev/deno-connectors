@@ -7,46 +7,40 @@ stages:
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
 
-.configure-publish:
-  stage: publish
-  artifacts:
-    paths:
-      - dist
+.binaries:
   before_script:
-    - source .ci-env.sh
-    - bash .citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}
-    - bash .citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}
-    - mkdir dist
-    - deno bundle --unstable mod.ts dist/mod.ts
+    - deno install --allow-net --name status-check status-check/run.ts
+    - deno install --allow-run --name dent dent/run.ts
+    - echo "export PATH=/root/.deno/bin:$PATH" >> $HOME/.bashrc
+    - source $HOME/.bashrc
 
 test:
+  extends: .binaries
   stage: test
   script:
-    - deno run --allow-net https://raw.githubusercontent.com/nativecode-dev/dent/v0.0.0/status-check/mod_run.ts http://localhost:5984 http://localhost:7878 http://localhost:8989
-    - deno run --allow-env --allow-read --allow-write --unstable https://raw.githubusercontent.com/nativecode-dev/dent/v0.0.0/dent-cli/mod_run.ts refresh --log
-    - deno cache --unstable mod.ts
-    - deno test --allow-env --allow-net --allow-read --allow-write --unstable
+    - status-check http://localhost:5984
+    - deno run --allow-env --allow-read --allow-write --unstable dent-cli/mod_run.ts refresh --log
+    - deno test --allow-env --allow-read --allow-net --allow-write --unstable
   services:
     - couchdb:2
-    - nativecode/test-radarr:latest
-    - nativecode/test-sonarr:latest
   variables:
     COUCHDB_USER: guest
     COUCHDB_PASSWORD: guest
 
-prerelease:
-  extends: .configure-publish
+release:
+  extends:
+    - .binaries
   stage: publish
+  artifacts:
+    paths:
+      - dist
   script:
-    - npx standard-version --prerelease beta
-    - git push --follow-tags origin develop
+    - mkdir dist
+    - source .ci-env.sh
+    - bash .citools/setup-git ${BUILD_REPO_BRANCH} ${BUILD_REPO_GIT} ${BUILD_REPO_EMAIL}
+    - bash .citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}
+    - deno bundle --unstable mod.ts dist/mod.ts
+    - dent tag-release
   only:
     - develop
-
-release:
-  extends: .configure-publish
-  script:
-    - npx standard-version
-    - git push --follow-tags origin master
-  only:
     - master
