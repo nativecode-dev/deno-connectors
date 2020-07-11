@@ -18,10 +18,12 @@ test:
   extends: .binaries
   stage: test
   script:
-    - status-check http://localhost:5984
+    - status-check http://localhost:5984 http://localhost:7878 http://localhost:8989
     - deno test --allow-env --allow-read --allow-net --allow-write --unstable
   services:
     - couchdb:2
+    - nativecode/test-radarr:latest
+    - nativecode/test-sonarr:latest
   variables:
     COUCHDB_USER: guest
     COUCHDB_PASSWORD: guest
