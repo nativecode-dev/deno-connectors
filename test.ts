@@ -1,3 +1,5 @@
 import './connect-couchdb/test.ts'
 import './rest-nzb/test.ts'
+import './rest-radarr/test.ts'
+import './rest-sonarr/test.ts'
 import './rest-tmdb/test.ts'
