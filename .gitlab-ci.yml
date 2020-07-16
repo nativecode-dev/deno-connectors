@@ -42,6 +42,8 @@ release:
     - bash .citools/setup-ssh ${BUILD_REPO_DOMAIN} ${BUILD_REPO_SSHKEY_PATH} ${BUILD_REPO_DOMAIN_SSH}
     - deno bundle --unstable mod.ts dist/mod.ts
     - dent tag-release
+  except:
+    - tags
   only:
     - develop
     - master
